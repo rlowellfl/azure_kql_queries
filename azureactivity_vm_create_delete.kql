@@ -1,0 +1,4 @@
+AzureActivity
+| where ActivityStatusValue == "Success"
+| where OperationNameValue has_any ("MICROSOFT.COMPUTE/VIRTUALMACHINES/DELETE", "MICROSOFT.COMPUTE/VIRTUALMACHINES/WRITE")
+| sort by TimeGenerated
