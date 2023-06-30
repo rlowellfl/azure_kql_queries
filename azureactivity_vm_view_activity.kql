@@ -1,0 +1,8 @@
+AzureActivity
+| where ActivityStatusValue == "Success"
+| where OperationNameValue contains "MICROSOFT.COMPUTE/VIRTUALMACHINES/"
+| extend vmname = tostring(split(_ResourceId, "/")[-1])
+| extend operation = tostring(split(OperationNameValue, "/")[-1])
+| where vmname == "vm-sample"
+| project TimeGenerated, vmname, ResourceGroup, SubscriptionId, operation, Properties, Caller, CallerIpAddress
+| sort by TimeGenerated
